@@ -1,0 +1,31 @@
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">STT</th>
+				<th scope="col">Name</th>
+				<th scope="col">Price</th>
+				<th scope="col">Describe</th>
+				<th scope="col">Old Image</th>
+				<th scope="col">Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each data}}
+			<tr>
+				<form method="POST" enctype="multipart/form-data" action="/update/{{this._id}}?_method=PUT">
+
+				<th>{{index_item @index}}</th>
+				<th><input name="name" type="text" value="{{this.name}}" /></th>
+				<th><input name="price" type="number" value="{{this.price}}" /></th>
+				<th><input name="describe" type="text" value="{{this.describe}}" /></th>
+				<th><input type="file" name="myFile"/></th>
+				<th>
+						<input type="submit" value="UPDATE"/>
+				</th>
+				
+				</form>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>

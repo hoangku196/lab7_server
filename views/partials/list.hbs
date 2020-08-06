@@ -1,0 +1,29 @@
+
+	<table class="table">
+		<thead>
+			<tr>
+				<th scope="col">STT</th>
+				<th scope="col">Name</th>
+				<th scope="col">Price</th>
+				<th scope="col">Describe</th>
+				<th scope="col">Image</th>
+				<th scope="col">Remove</th>
+			</tr>
+		</thead>
+		<tbody>
+			{{#each data}}
+			<tr>
+				<th>{{index_item @index}}</th>
+				<th>{{this.name}}</th>
+				<th>{{this.price}}</th>
+				<th>{{this.describe}}</th>
+				<th><img src="./uploads/{{this.img}}"/></th>
+				<th>
+					<form method="POST" action="/list/{{this._id}}?_method=DELETE">
+						<input type="submit" value="DELETE"/>
+					</form>
+				</th>
+			</tr>
+			{{/each}}
+		</tbody>
+	</table>
