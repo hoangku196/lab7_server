@@ -54,6 +54,12 @@ var product = new schema({
 	img: String
 });
 
+var collection1 = 'student'
+var student = new schema({
+	name: String,
+	number: Number,
+	address: String
+});
 
 
 app.get('/', function(req, res){
@@ -120,6 +126,29 @@ app.delete('/list/:id?', function(req, res){
 	var check = deleteItem.deleteOne({_id: req.params.id}, function(err){
 		res.redirect('/list');
 	});
+});
+
+app.get('/listProduct', function(req, res){
+	var list = db.model(collection, product, 'products');
+	var check = list.find({}, function(err, data){
+		res.send(data);	
+	}).lean();
+});
+
+app.get('/deleteProduct', function(req, res){
+	var id_delete = req.query.id;
+	var deleteItem = db.model(collection, product, 'products');
+	var check = deleteItem.deleteOne({_id: id_delete}, function(err){
+		if(err == null)
+			res.send('Xoa thanh cong');
+		else
+			res.send('Xoa khong thanh cong');
+	});
+});
+
+app.use(bodyParser.json());
+app.post('/insertUser', function(req, res){
+	console.log(req.body.name);
 });
 
 app.listen(_PORT, function(){
